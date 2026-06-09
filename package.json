@@ -7,7 +7,7 @@
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pj-kachina/openradioss-language-support.git"
+    "url": "https://github.com/pjkachina/openradioss-language-support.git"
   },
   "license": "MIT",
   "engines": {
