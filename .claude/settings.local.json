@@ -11,7 +11,17 @@
       "Bash(git config *)",
       "Bash(git add *)",
       "Bash(git commit -m '@ *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(git tag *)",
+      "Bash(ls -la \"C:\\\\Users\\\\maya\\\\Downloads\\\\logs_73053725426\" 2>&1 | head -20)",
+      "Read(//c/Users/maya/Downloads/logs_73053725426/**)",
+      "Bash(ls -la \"C:\\\\Users\\\\maya\\\\Downloads\\\\logs_73109559174\" 2>&1 | head -30)",
+      "Read(//c/Users/maya/Downloads/logs_73109559174/**)",
+      "Bash(ls -la \"C:\\\\Users\\\\maya\\\\Downloads\\\\logs_73110432317\" 2>&1 | head -20)",
+      "Read(//c/Users/maya/Downloads/logs_73110432317/**)"
     ]
   }
 }

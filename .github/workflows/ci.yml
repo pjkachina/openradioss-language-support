@@ -1,9 +1,8 @@
-name: CI/CD
+name: CI
 
 on:
   push:
     branches: [main, master, develop]
-    tags: ['v*']
   pull_request:
     branches: [main, master, develop]
 
@@ -40,44 +39,3 @@ jobs:
         run: npm install
       - name: Compile TypeScript
         run: npm run compile
-
-  publish-pypi:
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: [test-python, test-extension]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-      - name: Install build tools
-        run: pip install build twine
-      - name: Build distribution
-        run: python -m build
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
-
-  publish-vscode:
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: [test-python, test-extension]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Install dependencies
-        run: npm install
-      - name: Package extension
-        run: npm run package
-      - name: Publish to VS Code Marketplace
-        run: npm run publish
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
-      - name: Publish to Open VSX
-        uses: HaaLeo/publish-vscode-extension@v1
-        with:
-          pat: ${{ secrets.OVSX_PAT }}
-          registryUrl: 'https://open-vsx.org'

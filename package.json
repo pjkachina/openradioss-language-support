@@ -4,7 +4,7 @@
   "description": "Engineering-aware semantic diff tool for CAE input files (OpenRadioss, NASTRAN, LS-DYNA)",
   "version": "0.1.0",
   "publisher": "MayaKachina",
-  "icon": "assets/icon.svg",
+  "icon": "assets/icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/pj-kachina/DeckLens-Semantic-Diff-for-CAE.git"
@@ -30,13 +30,6 @@
     "simulation"
   ],
   "main": "./out/extension.js",
-  "activationEvents": [
-    "onLanguage:rad",
-    "onLanguage:bdf",
-    "onLanguage:plaintext",
-    "onCommand:decklens.diff",
-    "onCommand:decklens.compareWithFile"
-  ],
   "contributes": {
     "commands": [
       {
