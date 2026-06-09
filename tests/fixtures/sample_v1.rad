@@ -1,0 +1,51 @@
+#---1----|----2----|----3----|----4----|----5----|----6----|----7----|----8----|
+# DeckLens sample deck v1 — baseline structural model
+# Units: Mg, mm, s  → force [N], stress [MPa]
+/BEGIN
+/UNIT/1
+SI_mm
+Mg  mm  s
+#
+# Material: elastic steel
+/MAT/ELAST/1
+STEEL_E210
+  7.85E-9
+  210000.0  0.3
+#
+# Shell property: 1.2mm outer panel
+/PROP/SHELL/1
+OUTER_PANEL
+  0  0  0  0
+  1.2  0.0  0.0  0  0  0  0  0
+#
+# Part definition
+/PART/1
+PANEL_PART
+  1  1  0  0  0
+#
+# Boundary condition: fixed support (translate only)
+/BCS/1
+FIXED_SUPPORT
+  0  0
+  1  1  1  0  0  0
+#
+# Applied force in Z direction, Fscale=1000 N
+/CLOAD/1
+APPLIED_FORCE
+  1  Z  1.0  1000.0  0.0  1.0E+30
+#
+# Nodes
+/NODE
+         1       0.000000       0.000000       0.000000
+         2     100.000000       0.000000       0.000000
+         3     100.000000     100.000000       0.000000
+         4       0.000000     100.000000       0.000000
+         5     200.000000       0.000000       0.000000
+         6     200.000000     100.000000       0.000000
+#
+# Shell elements (EID  PID  N1  N2  N3  N4)
+/SHELL/1
+         1         1         1         2         3         4
+         2         1         2         5         6         3
+#
+/END

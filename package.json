@@ -1,0 +1,150 @@
+{
+  "name": "decklens",
+  "displayName": "DeckLens: Semantic Diff for CAE",
+  "description": "Engineering-aware semantic diff tool for CAE input files (OpenRadioss, NASTRAN, LS-DYNA)",
+  "version": "0.1.0",
+  "publisher": "MayaKachina",
+  "icon": "assets/icon.svg",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pj-kachina/DeckLens-Semantic-Diff-for-CAE.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0",
+    "node": ">=18.0.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "CAE",
+    "FEA",
+    "diff",
+    "OpenRadioss",
+    "NASTRAN",
+    "LS-DYNA",
+    "semantic-diff",
+    "engineering",
+    "simulation"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:rad",
+    "onLanguage:bdf",
+    "onLanguage:plaintext",
+    "onCommand:decklens.diff",
+    "onCommand:decklens.compareWithFile"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "decklens.diff",
+        "title": "DeckLens: Show Semantic Diff",
+        "category": "DeckLens"
+      },
+      {
+        "command": "decklens.compareWithFile",
+        "title": "DeckLens: Compare with File",
+        "category": "DeckLens"
+      },
+      {
+        "command": "decklens.openSettings",
+        "title": "DeckLens: Open Settings",
+        "category": "DeckLens"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "decklens.compareWithFile",
+          "group": "2_workspace",
+          "when": "resourceFilename =~ /\\.(rad|bdf|k)$/"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "decklens.diff"
+        },
+        {
+          "command": "decklens.compareWithFile"
+        },
+        {
+          "command": "decklens.openSettings"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "DeckLens",
+      "properties": {
+        "decklens.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Anthropic API key for Claude-powered analysis (ANTHROPIC_API_KEY). Leave empty to use environment variable.",
+          "markdownDescription": "Anthropic API key (from `.env` or environment). Get one at [api.anthropic.com](https://console.anthropic.com)"
+        },
+        "decklens.enableAI": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Claude AI analysis (requires valid API key)"
+        },
+        "decklens.minSeverity": {
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "CRITICAL"
+          ],
+          "default": "INFO",
+          "description": "Minimum severity level to display"
+        },
+        "decklens.model": {
+          "type": "string",
+          "default": "claude-opus-4-8",
+          "description": "Claude model ID for analysis (claude-opus-4-8, claude-sonnet-4-6, claude-haiku-4-5)"
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "rad",
+        "aliases": [
+          "OpenRadioss",
+          "rad"
+        ],
+        "extensions": [
+          ".rad",
+          ".radians"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rad",
+        "scopeName": "source.rad",
+        "path": "./syntaxes/openradioss.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-electron": "^2.3.0",
+    "typescript": "^5.3.0",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "@vscode/extension-telemetry": "^0.9.0"
+  }
+}

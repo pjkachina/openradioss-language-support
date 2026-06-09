@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "OpenRadioss",
+  "patterns": [
+    {
+      "name": "comment.line.hash.openradioss",
+      "match": "#.*$"
+    },
+    {
+      "name": "keyword.control.openradioss",
+      "match": "^\\s*/[A-Z]+(/[A-Z]+)?(/\\d+)?\\s*$"
+    },
+    {
+      "name": "constant.numeric.openradioss",
+      "match": "(?:^|\\s)[-+]?(?:\\d+\\.?\\d*|\\.\\d+)(?:[eEdD][-+]?\\d+)?(?=\\s|$)"
+    }
+  ],
+  "scopeName": "source.rad"
+}
