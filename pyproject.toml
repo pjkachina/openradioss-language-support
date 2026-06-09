@@ -26,6 +26,12 @@ keywords = [
     "CAE", "FEA", "diff", "OpenRadioss", "NASTRAN", "LS-DYNA",
     "semantic-diff", "engineering", "simulation", "comparison"
 ]
+dependencies = [
+    "anthropic>=0.49.0",
+    "click>=8.1",
+    "rich>=13.0",
+    "python-dotenv>=1.0",
+]
 
 [project.urls]
 Homepage = "https://github.com/pj-kachina/DeckLens-Semantic-Diff-for-CAE"
@@ -33,13 +39,6 @@ Documentation = "https://github.com/pj-kachina/DeckLens-Semantic-Diff-for-CAE#re
 Repository = "https://github.com/pj-kachina/DeckLens-Semantic-Diff-for-CAE.git"
 Issues = "https://github.com/pj-kachina/DeckLens-Semantic-Diff-for-CAE/issues"
 Changelog = "https://github.com/pj-kachina/DeckLens-Semantic-Diff-for-CAE/blob/main/CHANGELOG.md"
-
-dependencies = [
-    "anthropic>=0.49.0",
-    "click>=8.1",
-    "rich>=13.0",
-    "python-dotenv>=1.0",
-]
 
 [project.optional-dependencies]
 dev = [
