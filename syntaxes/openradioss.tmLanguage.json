@@ -1,19 +1,105 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "OpenRadioss",
+  "scopeName": "source.rad",
+  "fileTypes": ["rad"],
   "patterns": [
-    {
-      "name": "comment.line.hash.openradioss",
-      "match": "#.*$"
-    },
-    {
-      "name": "keyword.control.openradioss",
-      "match": "^\\s*/[A-Z]+(/[A-Z]+)?(/\\d+)?\\s*$"
-    },
-    {
-      "name": "constant.numeric.openradioss",
-      "match": "(?:^|\\s)[-+]?(?:\\d+\\.?\\d*|\\.\\d+)(?:[eEdD][-+]?\\d+)?(?=\\s|$)"
-    }
+    {"include": "#comments"},
+    {"include": "#keywords"},
+    {"include": "#parameters"},
+    {"include": "#numbers"},
+    {"include": "#strings"}
   ],
-  "scopeName": "source.rad"
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.hash.openradioss",
+          "match": "^\\s*#.*$"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.section.openradioss",
+          "match": "^\\s*/BEGIN\\s*$"
+        },
+        {
+          "name": "keyword.control.section.openradioss",
+          "match": "^\\s*/END\\s*$"
+        },
+        {
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(UNIT|PARAMETER|FUNCTION|TABLE|MATERIAL|MAT|PROPERTY|PROP|SHELL|PART|NODE|ELEMENT|ELSHELL|TSHELL|BRICK|PENTA|TETRA|BEAM|TRUSS|MASS|RBE|RIGIDWALL|CONTACT|INTER|TIED|LOAD|CLOAD|DLOAD|BCS|BCNOD|SPC|SPCD|RBE2|RBE3|SURF|SURFACE|DOMAIN|SECTION|RBAG|PLOAD|GRAV|FLOWIC|MATICE|INIBRI|SET|GROUP|REMESHING|STATE|ENVIR|VERS)/(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"}
+          }
+        },
+        {
+          "name": "keyword.control.openradioss",
+          "match": "^\\s*/(UNIT|PARAMETER|FUNCTION|TABLE|MATERIAL|MAT|PROPERTY|PROP|SHELL|PART|NODE|ELEMENT|ELSHELL|TSHELL|BRICK|PENTA|TETRA|BEAM|TRUSS|MASS|RBE|RIGIDWALL|CONTACT|INTER|TIED|LOAD|CLOAD|DLOAD|BCS|BCNOD|SPC|SPCD|RBE2|RBE3|SURF|SURFACE|DOMAIN|SECTION|RBAG|PLOAD|GRAV|FLOWIC|MATICE|INIBRI|SET|GROUP|REMESHING|STATE|ENVIR|VERS)/\\d+\\s*$"
+        },
+        {
+          "name": "keyword.control.openradioss",
+          "match": "^\\s*/(UNIT|PARAMETER|FUNCTION|TABLE|MATERIAL|MAT|PROPERTY|PROP|SHELL|PART|NODE|ELEMENT|ELSHELL|TSHELL|BRICK|PENTA|TETRA|BEAM|TRUSS|MASS|RBE|RIGIDWALL|CONTACT|INTER|TIED|LOAD|CLOAD|DLOAD|BCS|BCNOD|SPC|SPCD|RBE2|RBE3|SURF|SURFACE|DOMAIN|SECTION|RBAG|PLOAD|GRAV|FLOWIC|MATICE|INIBRI|SET|GROUP|REMESHING|STATE|ENVIR|VERS)\\s*$"
+        },
+        {
+          "name": "keyword.operator.openradioss",
+          "match": "^\\s*/[A-Z]+(/[A-Z0-9]+)*(/\\d+)?\\s*$"
+        }
+      ]
+    },
+    "parameters": {
+      "patterns": [
+        {
+          "name": "variable.parameter.openradioss",
+          "match": "^\\s*&[A-Z_][A-Z0-9_]*\\s*="
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.float.openradioss",
+          "match": "[-+]?(?:\\d+\\.\\d*|\\.\\d+)(?:[eEdD][-+]?\\d+)?"
+        },
+        {
+          "name": "constant.numeric.integer.openradioss",
+          "match": "(?:^|\\s)[-+]?\\d+(?=\\s|$)"
+        },
+        {
+          "name": "constant.numeric.float.scientific.openradioss",
+          "match": "\\d+\\.\\d*[eEdD][-+]?\\d+"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.openradioss",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.openradioss",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.openradioss",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.openradioss",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

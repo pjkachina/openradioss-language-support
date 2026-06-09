@@ -1,158 +1,94 @@
-# DeckLens: Semantic Diff for CAE
+# OpenRadioss Language Support
 
 ![VS Code Extension](https://img.shields.io/badge/extension-VS%20Code-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-**DeckLens** は CAE（計算力学）入力ファイルの**セマンティックdiff**ツールです。テキスト差分ではなく、エンジニアリング観点から「何が変わった」かを理解します。
+Syntax highlighting and language support for **OpenRadioss** CAE input files (.rad) in Visual Studio Code.
 
-## 問題
+## Features
 
-CAE検証チームの現状：
-- 型紙（テンプレート）から修正内容を手動確認 → ボトルネック
-- `grep` + テキストエディタで変更追跡 → ミスが多い
-- 厚さ変更は単なる％数値表示 → 剛性への影響が不明確
-- 境界条件削除が見落とされやすい
+✅ **Complete Syntax Highlighting**
+- Keywords and sections (`/BEGIN`, `/END`, `/UNIT`, `/MAT`, `/PROP`, `/SHELL`, `/NODE`, `/ELEMENT`, etc.)
+- Comments (`#` lines)
+- Numeric values (integers, decimals, scientific notation)
+- Parameters and variables
 
-## ソリューション
+✅ **Language Support**
+- File association for `.rad` and `.radians` files
+- Proper bracket matching and auto-closing
+- Line comment support (`#`)
 
+✅ **Smart Formatting**
+- Automatic bracket pairing
+- Multi-line bracket support
+- String literal highlighting
+
+## Installation
+
+1. Open **Visual Studio Code**
+2. Go to **Extensions** (Ctrl+Shift+X)
+3. Search for **"OpenRadioss Language Support"**
+4. Click **Install**
+
+Or install directly via CLI:
 ```bash
-$ decklens diff before.rad after.rad
-
-─────────── DeckLens Semantic Diff ──────────
-  Before: before.rad
-  After:  after.rad
-
-┌─ Summary ─┐
-│ 2 CRITICAL, 4 WARNING │
-└────────────┘
-
-┌────────┬─────────┬────────────┬─────────────────────┐
-│ Sev    │ Type    │ Name       │ Field               │
-├────────┼─────────┼────────────┼─────────────────────┤
-│ [CRIT] │ PROP/SH │ OUTER_PNL  │ thickness           │
-│        │         │            │ (bend-stiffness     │
-│        │         │            │ +138%)              │
-│ [CRIT] │ CLOAD   │ FORCE_Z    │ Fscale_y: 1000→2000│
-│ [WARN] │ MAT/ELS │ STEEL      │ E: 210k→206k (-1.9%)
-│ [WARN] │ BCS     │ FIXED_SUP  │ RX: free→fixed      │
-└────────┴─────────┴────────────┴─────────────────────┘
-
-🤖 AI Engineering Analysis (Claude Opus 4.8)
-─────────────────────────────────────────
-曲げ剛性が +138% 増加（t³則）するため、座屈荷重が大幅に上昇。
-ただし Young の係数が -1.9% 低下しているため、相殺効果は限定的。
-回転拘束追加により、モーメント反力が発生可能性あり。
-負荷 2 倍は FOS に直結 — 応力状態の再確認推奨。
+code --install-extension MayaKachina.openradioss-language-support
 ```
 
-### 主な機能
+## Usage
 
-✅ **OpenRadioss パーサー**
-- `/PROP/SHELL`, `/MAT/ELAST`, `/MAT/PLAS_JOHNS`, `/PART`, `/BCS`, `/LOAD`, `/INTER` 対応
-- FORTRAN D-notation（`7.85D-9`）自動変換
+Simply open any `.rad` or `.radians` file in VS Code, and syntax highlighting will be applied automatically.
 
-✅ **セマンティック差分エンジン**
-- 厚さ変更 → 曲げ剛性（EI ∝ t³）を自動計算・注釈
-- Young係数 → 剛性への影響を評価
-- 境界条件追加/削除 → 重大度を自動判定
-- 負荷 2 倍 → CRITICAL フラグ
+**Example OpenRadioss deck:**
+```
+# Material definition
+/MAT/ELAST/1
+STEEL_MATERIAL
+  7.85e-9
+  210000.0  0.3
 
-✅ **重大度自動判定**
-| 重大度 | 条件 |
-|--------|------|
-| CRITICAL | ≥20% 変化、または BC/PART 削除 |
-| WARNING | 5–20% 変化、または BC 追加 |
-| INFO | <5% 変化 |
+# Shell property
+/PROP/SHELL/1
+OUTER_PANEL
+  0  0  0  0
+  1.2  0.0  0.0  0  0  0  0  0
 
-✅ **Claude AI 分析（オプション）**
-- `claude-opus-4-8` による自動解釈
-- 適応思考（adaptive thinking）で複雑な物理関係を推論
-- JSON 出力対応（CI/CD 統合）
-
-## インストール
-
-### PyPI（CLI ツール）
-
-```bash
-pip install decklens-semantic-diff
+# Node coordinates
+/NODE
+         1       0.000000       0.000000       0.000000
+         2     100.000000       0.000000       0.000000
 ```
 
-### VS Code 拡張機能
+## Supported Sections
 
-1. VS Code Marketplace で「DeckLens」検索
-2. インストール
-3. `.env` に `ANTHROPIC_API_KEY` 設定（AI 分析有効化）
+The extension recognizes all major OpenRadioss sections including:
+- `/UNIT` — Unit system definition
+- `/MATERIAL`, `/MAT` — Material properties
+- `/PROPERTY`, `/PROP` — Element properties (SHELL, SOLID, BEAM, etc.)
+- `/PART` — Part definitions
+- `/NODE` — Node coordinates
+- `/SHELL`, `/ELEMENT` — Element definitions
+- `/BCS` — Boundary conditions
+- `/CLOAD`, `/DLOAD` — Load definitions
+- `/LOAD` — Load cases
+- And many more CAE-specific sections
 
-## 使い方
+## Settings
 
-### CLI
+This extension has minimal settings — just enable/disable the language support:
+- Right-click a `.rad` file → Select "Open With" → Choose **OpenRadioss Language Support**
 
-```bash
-# 基本的な diff
-decklens diff before.rad after.rad
+For more details on OpenRadioss syntax, refer to the official [OpenRadioss documentation](https://openradioss.atlassian.net/).
 
-# AI 分析をスキップ
-decklens diff before.rad after.rad --no-ai
+## License
 
-# JSON 出力（CI/CD 連携）
-decklens diff before.rad after.rad --format json
+MIT
 
-# 重大度フィルタ
-decklens diff before.rad after.rad --min-severity WARNING
+## Feedback & Support
 
-# 別の Claude モデル指定
-decklens diff before.rad after.rad --model claude-sonnet-4-6
-```
-
-### VS Code 拡張機能
-
-右クリック → **DeckLens: Compare with** → ファイル選択 → サイドパネルに結果表示
-
-## 対応フォーマット
-
-| フォーマット | サポート | ロードマップ |
-|------------|---------|-----------|
-| OpenRadioss (.rad) | ✅ | 本実装 |
-| NASTRAN (.bdf) | 🔜 | Q3 2026 |
-| LS-DYNA (.k) | 🔜 | Q3 2026 |
-
-## 技術仕様
-
-- **言語**: Python 3.11+（CLI）、TypeScript（VS Code 拡張）
-- **API**: Claude Opus 4.8、adaptive thinking、high effort
-- **出力**: Rich テーブル、Markdown、JSON
-- **ライセンス**: MIT
-
-## 必要な環境
-
-- Python 3.11+
-- VS Code 1.85+（拡張機能使用時）
-- ANTHROPIC_API_KEY（AI 分析機能使用時）
-
-## トラブルシューティング
-
-### Q: AI 分析が実行されない
-**A**: `.env` に `ANTHROPIC_API_KEY` が設定されているか確認。未設定なら `--no-ai` を付与。
-
-### Q: 出力が文字化けする（Windows）
-**A**: PowerShell で UTF-8 出力を有効化：
-```powershell
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-```
-
-## 開発
-
-```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/DeckLens-Semantic-Diff-for-CAE.git
-cd DeckLens-Semantic-Diff-for-CAE
-pip install -e ".[dev]"
-pytest -v
-```
-
-## フィードバック
-
-Issue や Discussion は [GitHub](https://github.com/YOUR_GITHUB_USERNAME/DeckLens-Semantic-Diff-for-CAE/issues) へ。
+For issues or feature requests, visit:
+- GitHub: [pj-kachina/openradioss-language-support](https://github.com/pj-kachina/openradioss-language-support)
 
 ---
 
-**Made with ❤️ by CAE engineers, for CAE engineers**
+**Tip:** Pair this extension with other CAE tools and linters for a complete development environment.

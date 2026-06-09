@@ -1,13 +1,13 @@
 {
-  "name": "decklens",
-  "displayName": "DeckLens: Semantic Diff for CAE",
-  "description": "Engineering-aware semantic diff tool for CAE input files (OpenRadioss, NASTRAN, LS-DYNA)",
-  "version": "0.1.0",
+  "name": "openradioss-language-support",
+  "displayName": "OpenRadioss Language Support",
+  "description": "Syntax highlighting and language support for OpenRadioss CAE input files (.rad)",
+  "version": "1.0.0",
   "publisher": "MayaKachina",
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pj-kachina/DeckLens-Semantic-Diff-for-CAE.git"
+    "url": "https://github.com/pj-kachina/openradioss-language-support.git"
   },
   "license": "MIT",
   "engines": {
@@ -15,90 +15,20 @@
     "node": ">=20.0.0"
   },
   "categories": [
-    "Visualization",
-    "Other"
+    "Programming Languages"
   ],
   "keywords": [
-    "CAE",
-    "FEA",
-    "diff",
-    "OpenRadioss",
-    "NASTRAN",
-    "LS-DYNA",
-    "semantic-diff",
-    "engineering",
-    "simulation"
+    "openradioss",
+    "rad",
+    "cae",
+    "fea",
+    "syntax",
+    "highlighting",
+    "language",
+    "simulation",
+    "engineering"
   ],
-  "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "decklens.diff",
-        "title": "DeckLens: Show Semantic Diff",
-        "category": "DeckLens"
-      },
-      {
-        "command": "decklens.compareWithFile",
-        "title": "DeckLens: Compare with File",
-        "category": "DeckLens"
-      },
-      {
-        "command": "decklens.openSettings",
-        "title": "DeckLens: Open Settings",
-        "category": "DeckLens"
-      }
-    ],
-    "menus": {
-      "explorer/context": [
-        {
-          "command": "decklens.compareWithFile",
-          "group": "2_workspace",
-          "when": "resourceFilename =~ /\\.(rad|bdf|k)$/"
-        }
-      ],
-      "commandPalette": [
-        {
-          "command": "decklens.diff"
-        },
-        {
-          "command": "decklens.compareWithFile"
-        },
-        {
-          "command": "decklens.openSettings"
-        }
-      ]
-    },
-    "configuration": {
-      "title": "DeckLens",
-      "properties": {
-        "decklens.apiKey": {
-          "type": "string",
-          "default": "",
-          "description": "Anthropic API key for Claude-powered analysis (ANTHROPIC_API_KEY). Leave empty to use environment variable.",
-          "markdownDescription": "Anthropic API key (from `.env` or environment). Get one at [api.anthropic.com](https://console.anthropic.com)"
-        },
-        "decklens.enableAI": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable Claude AI analysis (requires valid API key)"
-        },
-        "decklens.minSeverity": {
-          "type": "string",
-          "enum": [
-            "INFO",
-            "WARNING",
-            "CRITICAL"
-          ],
-          "default": "INFO",
-          "description": "Minimum severity level to display"
-        },
-        "decklens.model": {
-          "type": "string",
-          "default": "claude-opus-4-8",
-          "description": "Claude model ID for analysis (claude-opus-4-8, claude-sonnet-4-6, claude-haiku-4-5)"
-        }
-      }
-    },
     "languages": [
       {
         "id": "rad",
