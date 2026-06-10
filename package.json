@@ -3,7 +3,7 @@
   "displayName": "OpenRadioss Language Support",
   "description": "Syntax highlighting and language support for OpenRadioss CAE input files (.rad)",
   "version": "1.0.1",
-  "publisher": "pjkachina",
+  "publisher": "kachinataro0212",
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
