@@ -1,9 +1,9 @@
 {
-  "name": "openradioss-language-support",
-  "displayName": "OpenRadioss Language Support",
+  "name": "OpenRadioss-language-package",
+  "displayName": "OpenRadioss-language package",
   "description": "Syntax highlighting and language support for OpenRadioss CAE input files (.rad)",
-  "version": "1.0.1",
-  "publisher": "kachinataro0212",
+  "version": "1.0.2",
+  "publisher": "Nakashin0212",
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",

@@ -1,27 +1,30 @@
 <svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background circle -->
-  <circle cx="64" cy="64" r="60" fill="#0EA5E9" opacity="0.1"/>
+  <!-- Background -->
+  <rect width="128" height="128" rx="18" fill="#1E293B"/>
 
-  <!-- Main lens shape -->
-  <circle cx="64" cy="64" r="48" fill="none" stroke="#0EA5E9" stroke-width="3"/>
+  <!-- FEM mesh hexahedron wireframe (cube-like element) -->
+  <!-- Front face -->
+  <polygon points="32,52 64,36 96,52 96,80 64,96 32,80" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linejoin="round"/>
 
-  <!-- Inner detail - diff arrows -->
-  <g transform="translate(64, 64)">
-    <!-- Left arrow (before) -->
-    <line x1="-20" y1="0" x2="-5" y2="0" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
-    <polygon points="-5,0 -10,-3 -8,0 -10,3" fill="#EF4444"/>
+  <!-- Inner back face (offset) -->
+  <polygon points="44,57 64,46 84,57 84,75 64,86 44,75" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linejoin="round" opacity="0.5"/>
 
-    <!-- Right arrow (after) -->
-    <line x1="5" y1="0" x2="20" y2="0" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
-    <polygon points="20,0 15,-3 17,0 15,3" fill="#22C55E"/>
+  <!-- Connecting edges (depth lines) -->
+  <line x1="32" y1="52" x2="44" y2="57" stroke="#38BDF8" stroke-width="1.5" opacity="0.5"/>
+  <line x1="96" y1="52" x2="84" y2="57" stroke="#38BDF8" stroke-width="1.5" opacity="0.5"/>
+  <line x1="96" y1="80" x2="84" y2="75" stroke="#38BDF8" stroke-width="1.5" opacity="0.5"/>
+  <line x1="32" y1="80" x2="44" y2="75" stroke="#38BDF8" stroke-width="1.5" opacity="0.5"/>
+  <line x1="64" y1="36" x2="64" y2="46" stroke="#38BDF8" stroke-width="1.5" opacity="0.5"/>
+  <line x1="64" y1="96" x2="64" y2="86" stroke="#38BDF8" stroke-width="1.5" opacity="0.5"/>
 
-    <!-- Center circle (convergence point) -->
-    <circle cx="0" cy="0" r="3" fill="#0EA5E9"/>
+  <!-- Highlight nodes -->
+  <circle cx="32" cy="52" r="3" fill="#7DD3FC"/>
+  <circle cx="64" cy="36" r="3" fill="#7DD3FC"/>
+  <circle cx="96" cy="52" r="3" fill="#7DD3FC"/>
+  <circle cx="96" cy="80" r="3" fill="#7DD3FC"/>
+  <circle cx="64" cy="96" r="3" fill="#7DD3FC"/>
+  <circle cx="32" cy="80" r="3" fill="#7DD3FC"/>
 
-    <!-- Lower comparison symbols -->
-    <text x="0" y="24" font-size="12" fill="#0EA5E9" text-anchor="middle" font-weight="bold">≢</text>
-  </g>
-
-  <!-- Top label arc -->
-  <path d="M 35 25 A 29 29 0 0 1 93 25" fill="none" stroke="#0EA5E9" stroke-width="2" opacity="0.5"/>
+  <!-- "OR" label at bottom (OpenRadioss abbreviation) -->
+  <text x="64" y="118" font-size="11" fill="#94A3B8" text-anchor="middle" font-family="monospace" font-weight="bold" letter-spacing="2">OpenRadioss</text>
 </svg>

@@ -1,94 +1,97 @@
-# OpenRadioss Language Support
+# OpenRadioss-language package
 
-![VS Code Extension](https://img.shields.io/badge/extension-VS%20Code-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/Nakashin0212.OpenRadioss-language-package?label=VS%20Code%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=Nakashin0212.OpenRadioss-language-package)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-Syntax highlighting and language support for **OpenRadioss** CAE input files (.rad) in Visual Studio Code.
-
-## Features
-
-✅ **Complete Syntax Highlighting**
-- Keywords and sections (`/BEGIN`, `/END`, `/UNIT`, `/MAT`, `/PROP`, `/SHELL`, `/NODE`, `/ELEMENT`, etc.)
-- Comments (`#` lines)
-- Numeric values (integers, decimals, scientific notation)
-- Parameters and variables
-
-✅ **Language Support**
-- File association for `.rad` and `.radians` files
-- Proper bracket matching and auto-closing
-- Line comment support (`#`)
-
-✅ **Smart Formatting**
-- Automatic bracket pairing
-- Multi-line bracket support
-- String literal highlighting
-
-## Installation
-
-1. Open **Visual Studio Code**
-2. Go to **Extensions** (Ctrl+Shift+X)
-3. Search for **"OpenRadioss Language Support"**
-4. Click **Install**
-
-Or install directly via CLI:
-```bash
-code --install-extension MayaKachina.openradioss-language-support
-```
-
-## Usage
-
-Simply open any `.rad` or `.radians` file in VS Code, and syntax highlighting will be applied automatically.
-
-**Example OpenRadioss deck:**
-```
-# Material definition
-/MAT/ELAST/1
-STEEL_MATERIAL
-  7.85e-9
-  210000.0  0.3
-
-# Shell property
-/PROP/SHELL/1
-OUTER_PANEL
-  0  0  0  0
-  1.2  0.0  0.0  0  0  0  0  0
-
-# Node coordinates
-/NODE
-         1       0.000000       0.000000       0.000000
-         2     100.000000       0.000000       0.000000
-```
-
-## Supported Sections
-
-The extension recognizes all major OpenRadioss sections including:
-- `/UNIT` — Unit system definition
-- `/MATERIAL`, `/MAT` — Material properties
-- `/PROPERTY`, `/PROP` — Element properties (SHELL, SOLID, BEAM, etc.)
-- `/PART` — Part definitions
-- `/NODE` — Node coordinates
-- `/SHELL`, `/ELEMENT` — Element definitions
-- `/BCS` — Boundary conditions
-- `/CLOAD`, `/DLOAD` — Load definitions
-- `/LOAD` — Load cases
-- And many more CAE-specific sections
-
-## Settings
-
-This extension has minimal settings — just enable/disable the language support:
-- Right-click a `.rad` file → Select "Open With" → Choose **OpenRadioss Language Support**
-
-For more details on OpenRadioss syntax, refer to the official [OpenRadioss documentation](https://openradioss.atlassian.net/).
-
-## License
-
-MIT
-
-## Feedback & Support
-
-For issues or feature requests, visit:
-- GitHub: [pj-kachina/openradioss-language-support](https://github.com/pj-kachina/openradioss-language-support)
+Syntax highlighting for **OpenRadioss** CAE input files (`.rad`) in Visual Studio Code.
 
 ---
 
-**Tip:** Pair this extension with other CAE tools and linters for a complete development environment.
+## Features
+
+### Syntax Highlighting
+
+Full coverage of OpenRadioss Starter input keywords, color-coded by category:
+
+| Category | Examples |
+|----------|---------|
+| Block headers | `/BEGIN`, `/END`, `#RADIOSS STARTER` |
+| Materials | `/MAT/LAW1` – `/MAT/LAW200`, `/HEAT/MAT`, `/NONLOCAL/MAT` |
+| Properties | `/PROP/TYPE1` – `/PROP/TYPE45`, `/PROP/INJECT1` |
+| Elements | `/NODE`, `/BRICK`, `/SHELL`, `/BEAM`, `/TETRA4`, `/PENTA6`, `/SPRING`, `/TRUSS` |
+| Failure models | `/FAIL/JOHNSON`, `/FAIL/GURSON`, `/FAIL/HASHIN`, 40+ models |
+| Equations of state | `/EOS/GRUNEISEN`, `/EOS/IDEAL-GAS`, 17+ EOS types |
+| Boundary conditions | `/BCS`, `/IMPVEL`, `/IMPDISP`, `/CLOAD`, `/GRAV` |
+| Contact/Interface | `/INTER/TYPE1` – `/INTER/TYPE25` and subtypes |
+| Initial conditions | `/INIVEL`, `/INIBRI`, `/INISHE`, `/INIQUA` and subtypes |
+| ALE / Fluid | `/ALE/GRID/*`, `/EBCS/*`, `/EULER/MAT` |
+| Monitoring | `/MONVOL/*`, `/GAUGE`, `/TH` |
+| Comments | `#` lines |
+| Numbers | Integers, decimals, scientific notation (`1.5E-3`, `2.1D+4`) |
+| Parameters | `&PARAM = value` |
+
+### Language Support
+
+- Auto file association for `.rad` and `.radians`
+- Bracket matching and auto-closing
+- Line comment toggle (`#`)
+
+---
+
+## Installation
+
+Search for **`OpenRadioss-language package`** in the VS Code Extensions panel (`Ctrl+Shift+X`).
+
+---
+
+## Example
+
+```radioss
+#RADIOSS STARTER
+#---1----|----2----|----3----|----4----|----5----|----6----|----7----|----8----|----9----|---10----|
+/UNIT/1
+kg mm ms
+
+/MAT/LAW2/1
+STEEL_S235
+  7.85E-09
+  210000.0           0.3
+  355.0      500.0   0.2       0.0
+
+/PROP/TYPE1/1
+SHELL_1MM
+  0   0   0   0   0   0   0   0   0
+  1.0     0.0     0.0     0     0
+
+/PART/1
+BODY_PANEL
+         1         1         0
+
+/NODE
+         1       0.000       0.000       0.000
+         2     100.000       0.000       0.000
+         3     100.000     100.000       0.000
+
+/BCS/1
+         1  000000  000000
+         2  000000  000000
+
+/GRAV/1
+GRAVITY
+         1       9810.0
+    0.0    0.0   -1.0
+
+/END
+```
+
+---
+
+## Links
+
+- [OpenRadioss Official Documentation](https://openradioss.atlassian.net/)
+- [OpenRadioss GitHub](https://github.com/OpenRadioss/OpenRadioss)
+- [Issue Tracker](https://github.com/pjkachina/openradioss-language-support/issues)
+
+---
+
+MIT License

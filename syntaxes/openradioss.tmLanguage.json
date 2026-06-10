@@ -5,7 +5,10 @@
   "fileTypes": ["rad"],
   "patterns": [
     {"include": "#comments"},
-    {"include": "#keywords"},
+    {"include": "#header"},
+    {"include": "#include_directives"},
+    {"include": "#block_keywords"},
+    {"include": "#begin_end"},
     {"include": "#parameters"},
     {"include": "#numbers"},
     {"include": "#strings"}
@@ -19,7 +22,30 @@
         }
       ]
     },
-    "keywords": {
+    "header": {
+      "patterns": [
+        {
+          "name": "keyword.control.header.openradioss",
+          "match": "^#RADIOSS\\s+STARTER\\b"
+        }
+      ]
+    },
+    "include_directives": {
+      "patterns": [
+        {
+          "name": "keyword.control.include.openradioss",
+          "match": "^\\s*#include\\b",
+          "captures": {
+            "0": {"name": "keyword.control.include.openradioss"}
+          }
+        },
+        {
+          "name": "keyword.control.include.openradioss",
+          "match": "^\\s*#enddata\\b"
+        }
+      ]
+    },
+    "begin_end": {
       "patterns": [
         {
           "name": "keyword.control.section.openradioss",
@@ -28,26 +54,287 @@
         {
           "name": "keyword.control.section.openradioss",
           "match": "^\\s*/END\\s*$"
+        }
+      ]
+    },
+    "block_keywords": {
+      "patterns": [
+        {
+          "comment": "MAT/LAW blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(MAT)/(LAW\\d+|B-K-EPS|GAS|K-EPS|PLAS_ZERIL|PLAS_PREDEF|USERij?)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
         },
         {
+          "comment": "PROP/TYPE blocks",
           "name": "keyword.control.block.openradioss",
-          "match": "^\\s*/(UNIT|PARAMETER|FUNCTION|TABLE|MATERIAL|MAT|PROPERTY|PROP|SHELL|PART|NODE|ELEMENT|ELSHELL|TSHELL|BRICK|PENTA|TETRA|BEAM|TRUSS|MASS|RBE|RIGIDWALL|CONTACT|INTER|TIED|LOAD|CLOAD|DLOAD|BCS|BCNOD|SPC|SPCD|RBE2|RBE3|SURF|SURFACE|DOMAIN|SECTION|RBAG|PLOAD|GRAV|FLOWIC|MATICE|INIBRI|SET|GROUP|REMESHING|STATE|ENVIR|VERS)/(.*?)(/\\d+)?\\s*$",
+          "match": "^\\s*/(PROP)/(TYPE\\d+|INJECT[12]|PCOMPP)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "FAIL blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(FAIL)/(ALTER|BIQUAD|CHANG|COCKCROFT|COMPOSITE|CONNECT|EMC|ENERGY|FABRIC|FLD|FRACTAL_DMG|GENE1|GURSON|HASHIN|HC_DSSE|HOFFMAN|INIEVO|JOHNSON|LAD_DAMA|LEMAITRE|MAXSTRAIN|MULLINS_OR|NXT|ORTHBIQUAD|ORTHENERG|ORTHSTRAIN|PUCK|RTCL|SAHRAEI|SNCONNECT|SPALLING|SYAZWAN|TAB[12]|TBUTCHER|TENSSTRAIN|TSAIHILL|TSAIWU|USERi|VISUAL|WIERZBICKI|WILKINS)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "EOS blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(EOS)/(COMPACTION2?|COMPACTION_TAB|EXPONENTIAL|GRUNEISEN|IDEAL-GAS(?:-V[ET])?|LINEAR|LSZK|MURNAGHAN|NASG|NOBLE-ABEL|OSBORNE|POLYNOMIAL|PUFF|SESAME|STIFF-GAS|TABULATED|TILLOTSON)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "INTER blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(INTER)(?:/(HERTZ/TYPE17|LAGDT/TYPE7|LAGMUL/TYPE(?:2|7|16|17)|SUB|TYPE(?:1|2|3|5|6|7|8|9|10|11|12|14|15|18|19|21|23|24|25)))?\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "DEFAULT/INTER blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(DEFAULT)/(INTER/TYPE(?:2|7|11|19|24|25))\\b.*$",
           "captures": {
             "1": {"name": "keyword.control.openradioss"},
             "2": {"name": "entity.name.type.openradioss"}
           }
         },
         {
-          "name": "keyword.control.openradioss",
-          "match": "^\\s*/(UNIT|PARAMETER|FUNCTION|TABLE|MATERIAL|MAT|PROPERTY|PROP|SHELL|PART|NODE|ELEMENT|ELSHELL|TSHELL|BRICK|PENTA|TETRA|BEAM|TRUSS|MASS|RBE|RIGIDWALL|CONTACT|INTER|TIED|LOAD|CLOAD|DLOAD|BCS|BCNOD|SPC|SPCD|RBE2|RBE3|SURF|SURFACE|DOMAIN|SECTION|RBAG|PLOAD|GRAV|FLOWIC|MATICE|INIBRI|SET|GROUP|REMESHING|STATE|ENVIR|VERS)/\\d+\\s*$"
+          "comment": "ALE blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(ALE)/(BCS|CLOSE|GRID/(?:DISP|DONEA|FLOW-TRACKING|LAGRANGE|LAPLACIAN|SPRING|STANDARD|VOLUME|ZERO)|LINK/VEL|MAT|MUSCL|SOLVER/FINT)\\b.*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"}
+          }
         },
         {
-          "name": "keyword.control.openradioss",
-          "match": "^\\s*/(UNIT|PARAMETER|FUNCTION|TABLE|MATERIAL|MAT|PROPERTY|PROP|SHELL|PART|NODE|ELEMENT|ELSHELL|TSHELL|BRICK|PENTA|TETRA|BEAM|TRUSS|MASS|RBE|RIGIDWALL|CONTACT|INTER|TIED|LOAD|CLOAD|DLOAD|BCS|BCNOD|SPC|SPCD|RBE2|RBE3|SURF|SURFACE|DOMAIN|SECTION|RBAG|PLOAD|GRAV|FLOWIC|MATICE|INIBRI|SET|GROUP|REMESHING|STATE|ENVIR|VERS)\\s*$"
+          "comment": "EBCS blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(EBCS)/(FLUXOUT|GRADP0|INIP|INIV|INLET|MONVOL|NORMV|NRF|PRES|VALVIN|VALVOUT|VEL)\\b.*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"}
+          }
         },
         {
+          "comment": "MONVOL blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(MONVOL)/(AIRBAG1|AREA|COMMU1|FVMBAG[12]|GAS|LFLUID|PRES)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "INI* blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(INIBEAM|INIBRI|INIQUA|INISHE|INISH3|INISPHCEL|INISPRI|INITRUSS|INIVEL|INIVOL)(?:/(AUX|AXIS|DENS|ENER|EPSP(?:_F)?|EREF|FAIL|FILL|FULL|FVM|NODE|ORTH_LOC|ORTHO|SCALE_YLD|STRA_F(?:GLO)?|STRESS|STRS_F(?:/GLOB)?|THICK))?\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "INICRACK, INIGRAV, INIGRAV, INIMAP, INISTA, INITEMP, ROTAINI",
+          "name": "keyword.control.openradioss",
+          "match": "^\\s*/(INICRACK|INIGRAV|INIMAP1D(?:/FILE)?|INIMAP2D(?:/FILE)?|INISTA|INITEMP|ROTAINI)\\b.*$"
+        },
+        {
+          "comment": "ADMESH blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(ADMESH)/(GLOBAL|SET|STATE/SH(?:EL|3N))\\b.*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"}
+          }
+        },
+        {
+          "comment": "BCS blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(BCS)(?:/(CYCLIC|LAGMUL|WALL))?\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "BOX blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(BOX)(?:/(BOX|CYLIN|RECTA|SPHER))?\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "DAMP blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(DAMP)(?:/(FREQUENCY_RANGE|FUNCT|INTER|VREL))?\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "DFS blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(DFS)/(DETCORD|DETLINE(?:/NODE)?|DETPLAN(?:/NODE)?|DETPOINT(?:/NODE|/SET)?|LASER|WAV_SHA)\\b.*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"}
+          }
+        },
+        {
+          "comment": "FRAME blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(FRAME)/(FIX|MOV2?|NOD)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "FUNCT blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(FUNC_2D|FUNCT|FUNCT_PYTHON|FUNCT_SMOOTH|MOVE_FUNCT)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "GAUGE blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(GAUGE)(?:/(POINT|SPH))?\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "GROUP/SET keywords",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(GR(?:BEAM|BRIC|NOD|PART|QUAD|SH3N|SHEL|SPRI|TRIA|TRUS))\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "HEAT/MAT, NONLOCAL/MAT, LEAK/MAT",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(HEAT|NONLOCAL|LEAK)/MAT\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "IMPDISP, IMPVEL etc.",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(IMPACC|IMPDISP(?:/FGEO)?|IMPFLUX|IMPTEMP|IMPVEL(?:/FGEO|/LAGMUL)?)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "INTER/SUB blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(INTER/SUB)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "LINE blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(LINE)(?:/(BOX2?|EDGE|GRBEAM|GRSPRI|GRTRUS|LINE|MAT|PART|PROP|SEG|SUBMODEL|SUBSET|SURF))?\\b.*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"}
+          }
+        },
+        {
+          "comment": "LOAD blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(LOAD)/(CENTRI|PBLAST|PCYL|PFLUID|PRESSURE)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "PERTURB blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(PERTURB)(?:/(FAIL/BIQUAD|PART/SH(?:ELL|3N|SOLID)))?\\b.*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"}
+          }
+        },
+        {
+          "comment": "PRELOAD blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(PRELOAD)(?:/(AXIAL))?\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "TH (time history) blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(TH)(?:/([A-Z0-9_/]+))?\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.type.openradioss"},
+            "3": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "Standard single-level blocks",
+          "name": "keyword.control.block.openradioss",
+          "match": "^\\s*/(ACCEL|ACTIV|ADMAS|AMS|ANALY|BEAM|BEM/DAA|BEM/FLOW|BRICK|BRIC20|CHECK/RFILE/OFF|CLOAD|CLUSTER|CNODE|CONVEC|CYL_JOINT|DEF_SHELL|DEF_SOLID|DRAPE|EIG|ENCRYPT|EREF|EULER/MAT|FXBODY|GJOINT|GRAV|IMPLICIT|INCLUDE_LS-DYNA|IOFLAG|KEY|LAGMUL|MADYMO/EXFEM|MERGE/RBODY|MPC|NBCS|NODE|PARAMETER|PART|PENTA6|PLOAD|PLY|QUAD|QUAD8|QUAD16|RBODY|RFILE|RLOAD|SH3N|SHEL16|SHELL|SKEW|SOL_STACK|SPHCEL|SPRING|SUBSET|SUBMODEL|SURF|TABLE|TETRA4|TETRA10|THICK|TRANSFORM|TRUSS|UNIT|VISC|XREF|FRIC_ORIENT|FRICTION|AMS|PERTURB|RWALL(?:/GEOM)?)\\b(.*?)(/\\d+)?\\s*$",
+          "captures": {
+            "1": {"name": "keyword.control.openradioss"},
+            "2": {"name": "entity.name.section.openradioss"}
+          }
+        },
+        {
+          "comment": "Fallback: any /UPPER_CASE block",
           "name": "keyword.operator.openradioss",
-          "match": "^\\s*/[A-Z]+(/[A-Z0-9]+)*(/\\d+)?\\s*$"
+          "match": "^\\s*/[A-Z][A-Z0-9_]*(?:/[A-Z0-9_]+)*(/\\d+)?\\s*$"
         }
       ]
     },
@@ -55,12 +342,16 @@
       "patterns": [
         {
           "name": "variable.parameter.openradioss",
-          "match": "^\\s*&[A-Z_][A-Z0-9_]*\\s*="
+          "match": "^\\s*&[A-Za-z_][A-Za-z0-9_]*\\s*="
         }
       ]
     },
     "numbers": {
       "patterns": [
+        {
+          "name": "constant.numeric.float.scientific.openradioss",
+          "match": "[-+]?\\d+\\.\\d*[eEdD][-+]?\\d+"
+        },
         {
           "name": "constant.numeric.float.openradioss",
           "match": "[-+]?(?:\\d+\\.\\d*|\\.\\d+)(?:[eEdD][-+]?\\d+)?"
@@ -68,10 +359,6 @@
         {
           "name": "constant.numeric.integer.openradioss",
           "match": "(?:^|\\s)[-+]?\\d+(?=\\s|$)"
-        },
-        {
-          "name": "constant.numeric.float.scientific.openradioss",
-          "match": "\\d+\\.\\d*[eEdD][-+]?\\d+"
         }
       ]
     },
