@@ -5,25 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - 2026-06-09
+## [1.0.2] - 2026-06-11
 
 ### Added
-- Initial release: OpenRadioss (.rad) parser
-- Semantic diff engine with engineering-aware change detection
-- Severity classification (CRITICAL, WARNING, INFO)
-- Bending stiffness annotation for thickness changes (EI ∝ t³)
-- Claude Opus 4.8 AI analysis with adaptive thinking
-- Rich CLI with colored table output
-- JSON output format for CI/CD integration
-- `--min-severity` filter option
-- Windows UTF-8 support
-- 19 test cases (parser, diff, integration)
-- VS Code extension integration
+- Expanded syntax highlighting: 300+ keywords sourced from official Altair documentation
+  - `/FAIL/*` — 40+ failure models (JOHNSON, GURSON, HASHIN, PUCK, TSAIWU, etc.)
+  - `/EOS/*` — 17+ equations of state (GRUNEISEN, IDEAL-GAS, TABULATED, etc.)
+  - `/INTER/TYPE*` — all contact interface types and subtypes
+  - `/INI*` — full set of initial condition blocks and subtypes
+  - `/ALE/*`, `/EBCS/*` — ALE and fluid boundary condition blocks
+  - `/MONVOL/*` — monitored volume blocks
+  - `/FRAME/*`, `/DFS/*`, `/ADMESH/*`, `/PERTURB/*` and more
+- New extension icon: FEM hex-element mesh design
 
-### Planned
-- NASTRAN (.bdf) parser (Q3 2026)
-- LS-DYNA (.k) parser (Q3 2026)
-- Web UI dashboard
-- Git integration (pre-commit hooks)
-- Batch comparison support
-- Localization (Japanese, Chinese, German)
+### Changed
+- README rewritten with keyword coverage table and live example deck
+
+## [1.0.1] - 2026-06-10
+
+### Changed
+- Publisher changed from `MayaKachina` to `pjkachina`
+- GitHub repository URL corrected
+
+## [1.0.0] - 2026-06-09
+
+### Added
+- Initial release: syntax highlighting for OpenRadioss `.rad` / `.radians` files
+- TextMate grammar covering basic keywords (`/BEGIN`, `/END`, `/MAT`, `/PROP`, `/SHELL`, `/NODE`, `/BCS`, etc.)
+- Language configuration (bracket matching, comment toggling)
+- File associations for `.rad` and `.radians`
