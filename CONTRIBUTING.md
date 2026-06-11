@@ -1,83 +1,50 @@
-# Contributing to DeckLens
+# Contributing to OpenRadioss-language package
 
-ありがとうございます！DeckLensへの貢献をお歓迎します。
+Contributions are welcome — bug reports, keyword additions, and grammar improvements are all appreciated.
 
-## セットアップ
+## Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/DeckLens-Semantic-Diff-for-CAE.git
-cd DeckLens-Semantic-Diff-for-CAE
-pip install -e ".[dev]"
+git clone https://github.com/pjkachina/openradioss-language-support.git
+cd openradioss-language-support
 npm install
-```
-
-## 開発ワークフロー
-
-### Python CLI（バックエンド）
-
-```bash
-# テスト実行
-pytest -v
-
-# コード品質チェック
-pytest --cov=decklens tests/
-```
-
-### VS Code 拡張機能（フロントエンド）
-
-```bash
-# TypeScript コンパイル
 npm run compile
-
-# ウォッチモード
-npm run watch
-
-# 拡張機能のテスト（VS Code が起動します）
-npm run test
 ```
 
-## プルリクエストガイドライン
+Press `F5` in VS Code to launch the Extension Development Host and test changes live.
 
-1. **ブランチ作成**: `feature/xxx` または `fix/xxx` を作成
-2. **テスト追加**: 新機能にはテストを追加
-3. **コミット**: 明確で簡潔なコミットメッセージを使用
-4. **ドキュメント**: 新機能には README 更新を含める
-5. **CI/CD**: すべてのテストが通っていることを確認
+## How to contribute
 
-### コミットメッセージの例
+### Adding or fixing keywords
 
+The grammar is defined in [syntaxes/openradioss.tmLanguage.json](syntaxes/openradioss.tmLanguage.json).
+Keywords are sourced from the official OpenRadioss Starter Input Reference:
+https://help.altair.com/hwsolvers/rad/topics/solvers/rad/starter_input_r.htm
+
+When adding keywords:
+1. Verify the keyword exists in the official documentation
+2. Place it in the correct category block within the grammar file
+3. Note the source URL in your PR description
+
+### Pull request guidelines
+
+1. Create a branch: `feature/xxx` or `fix/xxx`
+2. Keep changes focused — one topic per PR
+3. Use clear commit messages (e.g. `feat: add /SENSOR keyword`)
+4. Update `CHANGELOG.md` under `[Unreleased]`
+
+## Build & package
+
+```bash
+npm run compile       # compile TypeScript
+npx vsce package      # create .vsix
 ```
-feat: Add NASTRAN parser support
 
-- Implement BDF card parsing
-- Add MAT1, PSHELL, PCOMP support
-- Update CHANGELOG
+## Reporting issues
 
-Fixes #42
-```
+Use the [GitHub issue tracker](https://github.com/pjkachina/openradioss-language-support/issues).
+For security issues, email pj.kachina@gmail.com directly instead of opening a public issue.
 
-## コーディング規約
+## License
 
-### Python
-- PEP 8 準拠
-- Type hints を使用
-- ドキュメント文字列を記述
-
-### TypeScript
-- tslint 準拠
-- 4 スペースインデント
-- JSDoc を使用
-
-## ローカライゼーション
-
-DeckLens は複数言語対応を計画しています。翻訳のご協力をお待ちしています。
-
-翻訳ファイル: `i18n/` ディレクトリ（計画中）
-
-## セキュリティ
-
-セキュリティ脆弱性を発見した場合は、公開 issue ではなく、メール（pj.kachina@gmail.com）で報告してください。
-
-## ライセンス
-
-すべての貢献は MIT ライセンスの下で公開されます。
+By contributing, you agree that your contributions will be licensed under the MIT License.

@@ -94,4 +94,10 @@ GRAVITY
 
 ---
 
-MIT License
+MIT License — Copyright (c) 2026 Nakashin0212
+
+## Trademark Notice
+
+"OpenRadioss" and "Altair Radioss" are trademarks of Altair Engineering, Inc.
+This extension is an independent project and is not affiliated with, endorsed by,
+or sponsored by Altair Engineering, Inc.
