@@ -1,15 +1,15 @@
-*.pyc
-__pycache__/
-*.egg-info/
-dist/
-build/
-.pytest_cache/
-.coverage
-htmlcov/
-.env
-.vscode/
-node_modules/
-*.vsix
+# Build outputs
 out/
-.DS_Store
+*.vsix
+
+# Dependencies
+node_modules/
+
+# Local development
+.vscode/
+.claude/
 .evidence/
+
+# OS
+.DS_Store
+Thumbs.db

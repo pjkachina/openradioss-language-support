@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.1] - 2026-06-10
 
 ### Changed
-- Publisher changed from `MayaKachina` to `pjkachina`
+- Publisher ID updated
 - GitHub repository URL corrected
 
 ## [1.0.0] - 2026-06-09
