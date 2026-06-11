@@ -5,10 +5,18 @@
   "version": "1.0.2",
   "publisher": "Nakashin0212",
   "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#1E293B",
+    "theme": "dark"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/pjkachina/openradioss-language-support.git"
   },
+  "bugs": {
+    "url": "https://github.com/pjkachina/openradioss-language-support/issues"
+  },
+  "homepage": "https://github.com/pjkachina/openradioss-language-support#readme",
   "license": "MIT",
   "engines": {
     "vscode": "^1.85.0",
@@ -19,14 +27,16 @@
   ],
   "keywords": [
     "openradioss",
+    "radioss",
     "rad",
     "cae",
     "fea",
+    "fem",
     "syntax",
     "highlighting",
-    "language",
     "simulation",
-    "engineering"
+    "engineering",
+    "altair"
   ],
   "contributes": {
     "languages": [
