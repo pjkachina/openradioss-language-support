@@ -3,7 +3,15 @@
 [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/Nakashin0212.OpenRadioss-language-package?label=VS%20Code%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=Nakashin0212.OpenRadioss-language-package)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-Syntax highlighting for **OpenRadioss** CAE input files (`.rad`) in Visual Studio Code.
+Syntax highlighting and deck structure navigation for **OpenRadioss** CAE input files (`.rad`) in Visual Studio Code.
+
+---
+
+## Before / After
+
+| Without extension | With extension |
+|:-----------------:|:--------------:|
+| ![Before](assets/screenshot-asis.png) | ![After](assets/screenshot-tobe.png) |
 
 ---
 
@@ -29,6 +37,15 @@ Full coverage of OpenRadioss Starter input keywords, color-coded by category:
 | Comments | `#` lines |
 | Numbers | Integers, decimals, scientific notation (`1.5E-3`, `2.1D+4`) |
 | Parameters | `&PARAM = value` |
+
+### Deck Structure Panel
+
+A dedicated panel in the Activity Bar shows all blocks in the open `.rad` file as a navigable tree. Click any entry to jump directly to that line.
+
+- `/MAT`, `/PROP`, `/PART`, `/INTER`, `/FAIL` and all other blocks are listed
+- Block name shown alongside the keyword
+- Category icons for quick visual scanning
+- Refresh button to force update
 
 ### Language Support
 

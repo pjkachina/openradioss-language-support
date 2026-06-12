@@ -2,7 +2,7 @@
   "name": "OpenRadioss-language-package",
   "displayName": "OpenRadioss-language package",
   "description": "Syntax highlighting and language support for OpenRadioss CAE input files (.rad)",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "publisher": "Nakashin0212",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -39,6 +39,42 @@
     "altair"
   ],
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "openradioss-panel",
+          "title": "OpenRadioss",
+          "icon": "assets/activitybar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "openradioss-panel": [
+        {
+          "id": "openradiossOutline",
+          "name": "Deck Structure",
+          "icon": "assets/activitybar-icon.svg",
+          "contextualTitle": "OpenRadioss"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "openradioss.refreshOutline",
+        "title": "Refresh",
+        "icon": "$(refresh)",
+        "category": "OpenRadioss"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "openradioss.refreshOutline",
+          "when": "view == openradiossOutline",
+          "group": "navigation"
+        }
+      ]
+    },
     "languages": [
       {
         "id": "rad",
