@@ -2,8 +2,10 @@
   "name": "OpenRadioss-language-package",
   "displayName": "OpenRadioss-language package",
   "description": "Syntax highlighting and language support for OpenRadioss CAE input files (.rad)",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "Nakashin0212",
+  "main": "./out/extension",
+  "activationEvents": [],
   "icon": "assets/icon.png",
   "galleryBanner": {
     "color": "#1E293B",
